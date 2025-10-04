@@ -1,0 +1,229 @@
+# ============================================
+# EchoStream Monorepo .gitignore
+# ============================================
+
+# ============================================
+# Node.js & npm (Backend & Frontend)
+# ============================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# Dependency directories
+jspm_packages/
+
+# ============================================
+# NestJS (Backend)
+# ============================================
+backend/dist/
+backend/build/
+backend/.env
+backend/.env.local
+backend/.env.*.local
+
+# NestJS cache
+backend/.nest/
+
+# ============================================
+# Angular (Frontend)
+# ============================================
+frontend/dist/
+frontend/.angular/
+frontend/out-tsc/
+frontend/.ng-cache/
+
+# Angular environment files
+frontend/src/environments/environment.prod.ts
+frontend/src/environments/environment.local.ts
+frontend/.env
+frontend/.env.local
+
+# ============================================
+# Build & Distribution
+# ============================================
+dist/
+build/
+out/
+*.tgz
+*.log
+
+# ============================================
+# Environment Variables
+# ============================================
+.env
+.env.local
+.env.*.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Keep example env files
+!.env.example
+!.env.sample
+
+# ============================================
+# Docker
+# ============================================
+docker-compose.override.yml
+.docker/
+
+# Docker volumes (persistent data)
+volumes/
+data/
+
+# ============================================
+# Kafka & Zookeeper
+# ============================================
+kafka-logs/
+zookeeper-data/
+
+# ============================================
+# MongoDB
+# ============================================
+mongo-data/
+*.mongodb
+
+# ============================================
+# Redis
+# ============================================
+redis-data/
+dump.rdb
+
+# ============================================
+# Logs
+# ============================================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+pnpm-debug.log*
+
+# ============================================
+# OS Files
+# ============================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.directory
+.Trash-*
+
+# ============================================
+# IDEs & Editors
+# ============================================
+# VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# WebStorm
+.webstorm/
+
+# Sublime Text
+*.sublime-workspace
+*.sublime-project
+
+# Vim
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+
+# ============================================
+# Testing
+# ============================================
+coverage/
+*.lcov
+.nyc_output/
+junit.xml
+
+# E2E
+e2e/*.js
+e2e/*.map
+
+# ============================================
+# TypeScript
+# ============================================
+*.tsbuildinfo
+
+# ============================================
+# Misc
+# ============================================
+.cache/
+.temp/
+.tmp/
+*.pid
+*.seed
+*.pid.lock
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# ============================================
+# Upload & Attachments (development)
+# ============================================
+uploads/
+attachments/
+temp-uploads/
+
+# Keep example directories
+!uploads/.gitkeep
+!attachments/.gitkeep
+
+# ============================================
+# SSL/TLS Certificates (local development)
+# ============================================
+*.pem
+*.key
+*.crt
+*.cert
+ssl/
+
+# Keep example certificates
+!ssl/example.pem
+
+# ============================================
+# Documentation Build
+# ============================================
+docs/_build/
+docs/.docusaurus/
+
+# ============================================
+# Backup Files
+# ============================================
+*.bak
+*.backup
+*.swp
+*.swo
+*~
