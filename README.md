@@ -6,7 +6,7 @@ EchoStream is a real-time chat and event streaming platform built with a modern 
 
 ### **Phase 1: Authentication & User Management**
 - ✅ One-to-one chat functionality
-- ☐ User registration with email
+- ✅ User registration with email
 - ☐ Email verification with OTP (6-digit code)
 - ☐ User profile management
 - ☐ JWT authentication & refresh tokens
