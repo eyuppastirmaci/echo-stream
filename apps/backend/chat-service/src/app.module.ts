@@ -16,6 +16,9 @@ import { SERVICE_TOKENS } from './constants';
 import { ConfigModule } from '@nestjs/config';
 import { join } from 'path';
 import { ConfigService } from '@nestjs/config';
+import { ChatUser, ChatUserSchema } from './users/chat-user.schema';
+import { UserEventConsumer } from './users/user-event.consumer';
+import { UserEventMessageConsumer } from './users/user-event-message.consumer';
 
 @Module({
   imports: [
@@ -34,7 +37,7 @@ import { ConfigService } from '@nestjs/config';
     }),
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: join(process.cwd(), '.env'),
+      envFilePath: join(process.cwd(), '../../..', '.env'),
     }),
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
@@ -50,7 +53,10 @@ import { ConfigService } from '@nestjs/config';
       },
       inject: [ConfigService],
     }),
-    MongooseModule.forFeature([{ name: Message.name, schema: MessageSchema }]),
+    MongooseModule.forFeature([
+      { name: Message.name, schema: MessageSchema },
+      { name: ChatUser.name, schema: ChatUserSchema },
+    ]),
     CqrsModule,
     ClientsModule.register([
       {
@@ -69,6 +75,6 @@ import { ConfigService } from '@nestjs/config';
     ]),
   ],
   controllers: [MessageController, MessageQueryController, MessageConsumer],
-  providers: [ChatGateway, MessageService, SendMessageHandler, GetConversationHandler],
+  providers: [ChatGateway, MessageService, SendMessageHandler, GetConversationHandler, UserEventConsumer, UserEventMessageConsumer],
 })
 export class AppModule {}
