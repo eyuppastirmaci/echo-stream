@@ -67,6 +67,67 @@ EchoStream is a real-time chat and event streaming platform built with a modern 
 
 ---
 
+## Getting Started
+
+### Prerequisites
+
+- **Docker & Docker Compose**
+- **Node.js** (v18+ recommended)
+- **npm** or **yarn**
+
+### Environment Setup
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/eyuppastirmaci/echo-stream.git
+   cd echo-stream
+   ```
+
+2. **Create environment file:**
+   ```bash
+   # Copy the example environment file
+   cp .env.example .env
+   ```
+
+3. **Configure environment variables in `.env`**
+
+### Running the Project
+
+#### 1. Start Infrastructure Services (Docker)
+
+```bash
+# Start MongoDB, Kafka, and Zookeeper
+docker-compose up -d
+
+# Check if services are running
+docker-compose ps
+```
+
+#### 2. Start the Backend (Chat Service)
+
+```bash
+# Navigate to chat service directory
+cd apps/backend/chat-service
+
+# Install dependencies
+npm install
+
+# Build and start the service
+npm run build && npm start
+```
+
+### Running Tests
+
+```bash
+# Navigate to chat service directory
+cd apps/backend/chat-service
+
+# Run the test suite
+npm test
+```
+
+---
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
