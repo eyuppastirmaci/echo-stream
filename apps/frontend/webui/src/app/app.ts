@@ -1,73 +1,30 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { DatePipe } from '@angular/common';
-import { ChatManager } from './managers/chat.manager';
-import { APP_CONFIG } from './constants/app.config';
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { HeaderComponent } from './shared';
 
 @Component({
   selector: 'app-root',
-  imports: [FormsModule, DatePipe],
-  templateUrl: './app.html',
-  styleUrl: './app.scss'
-})
-export class App implements OnInit, OnDestroy {
-  // Form data
-  protected newMessage = '';
-
-  // Constants for template
-  protected readonly APP_CONFIG = APP_CONFIG;
-
-  constructor(private chatManager: ChatManager) {}
-
-  async ngOnInit(): Promise<void> {
-    // Initialize chat manager
-    await this.chatManager.initialize();
-
-    // Subscribe to real-time messages for logging
-    this.chatManager.messages$.subscribe(messages => {
-      console.log('Messages updated via RxJS:', messages.length);
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.chatManager.destroy();
-  }
-
-  // Expose ChatManager properties for template
-  protected get currentUser() {
-    return this.chatManager.currentUser;
-  }
-
-  protected get otherUser() {
-    return this.chatManager.otherUser;
-  }
-
-  protected get messages() {
-    return this.chatManager.messages;
-  }
-
-  protected get isConnected() {
-    return this.chatManager.isConnected;
-  }
-
-  protected get isInitialized() {
-    return this.chatManager.isInitialized;
-  }
-
-  /**
-   * Send a new message
-   */
-  protected sendMessage(): void {
-    if (this.chatManager.sendMessage(this.newMessage)) {
-      // Clear input only if message was sent successfully
-      this.newMessage = '';
+  imports: [RouterOutlet, HeaderComponent],
+  template: `
+    <div class="app">
+      <app-header></app-header>
+      <main class="main-content">
+        <router-outlet></router-outlet>
+      </main>
+    </div>
+  `,
+  styles: [`
+    .app {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
-  }
 
-  /**
-   * Retry connection
-   */
-  protected reconnect(): void {
-    this.chatManager.reconnect();
-  }
-}
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+  `]
+})
+export class App {}

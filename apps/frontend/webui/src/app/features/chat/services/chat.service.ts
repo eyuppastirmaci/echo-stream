@@ -2,7 +2,7 @@ import { Injectable, signal } from '@angular/core';
 import { io, Socket } from 'socket.io-client';
 import { BehaviorSubject } from 'rxjs';
 import { Message } from '../models/chat.models';
-import { APP_CONFIG, API_ENDPOINTS } from '../constants/app.config';
+import { APP_CONFIG, API_ENDPOINTS } from '../../../shared';
 
 @Injectable({
   providedIn: 'root'

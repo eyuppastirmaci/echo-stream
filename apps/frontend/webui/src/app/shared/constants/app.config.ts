@@ -1,4 +1,4 @@
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 /**
  * Application Constants
@@ -8,6 +8,7 @@ export const APP_CONFIG = {
   // Server URLs
   CHAT_SERVER_URL: environment.chatServerUrl,
   API_URL: environment.apiUrl,
+  USER_SERVICE_URL: environment.userServerUrl,
 
   // WebSocket Configuration
   WEBSOCKET_TRANSPORTS: ['websocket'] as const,

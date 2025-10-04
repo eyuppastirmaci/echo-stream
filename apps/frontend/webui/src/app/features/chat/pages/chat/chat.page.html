@@ -1,0 +1,91 @@
+<div class="chat-container">
+  <!-- Header -->
+  <div class="chat-header">
+    <h1>EchoStream Chat</h1>
+    <div class="connection-status" [class]="isConnected() ? 'connected' : 'disconnected'">
+      {{ isConnected() ? 'Connected' : 'Disconnected' }}
+    </div>
+  </div>
+
+  <!-- Loading state -->
+  @if (!isInitialized()) {
+    <div class="loading">
+      Initializing chat...
+    </div>
+  }
+
+  <!-- Chat interface -->
+  @if (isInitialized()) {
+    <div class="chat-interface">
+    <!-- Users info -->
+    <div class="users-info">
+      <div class="user-card">
+        <h3>You</h3>
+        <p><strong>Username:</strong> {{ currentUser() }}</p>
+      </div>
+      <div class="user-card">
+        <h3>Chatting with</h3>
+        <p><strong>Username:</strong> {{ otherUser() }}</p>
+      </div>
+    </div>
+
+    <!-- Messages area -->
+    <div class="messages-container">
+      <h3>Messages ({{ messages().length }})</h3>
+
+      <div class="messages-list" #messagesList>
+        @for (message of messages(); track message.id || $index) {
+          <div
+            class="message"
+            [class.own-message]="message.senderId === currentUser()">
+
+            <div class="message-header">
+              <span class="sender">{{ message.senderId === currentUser() ? 'You' : otherUser() }}</span>
+              <span class="timestamp">{{ message.timestamp | date:'short' }}</span>
+            </div>
+
+            <div class="message-content">
+              {{ message.content }}
+            </div>
+          </div>
+        }
+      </div>
+
+      @if (messages().length === 0) {
+        <div class="no-messages">
+          No messages yet. Send the first message!
+        </div>
+      }
+    </div>
+
+    <!-- Message input -->
+    <div class="message-input-container">
+      <form (ngSubmit)="sendMessage()" class="message-form">
+        <input
+          type="text"
+          [(ngModel)]="newMessage"
+          name="message"
+          [placeholder]="APP_CONFIG.MESSAGE_INPUT_PLACEHOLDER"
+          class="message-input"
+          [disabled]="!isConnected()"
+          required>
+        <button
+          type="submit"
+          class="send-button"
+          [disabled]="!newMessage.trim() || !isConnected()">
+          {{ APP_CONFIG.SEND_BUTTON_TEXT }}
+        </button>
+      </form>
+    </div>
+
+    <!-- Connection controls -->
+    @if (!isConnected()) {
+      <div class="connection-controls">
+        <button (click)="reconnect()" class="reconnect-button">
+          Reconnect
+        </button>
+      </div>
+    }
+    </div>
+  }
+</div>
