@@ -30,7 +30,13 @@ export class ChatGateway {
     @MessageBody() data: SendMessageDto,
     @ConnectedSocket() client: Socket,
   ) {
-    const senderId = client.data.userId; // Assume userId is set during authentication
+    // Use senderId from the message data if provided, otherwise fallback to client data
+    const senderId = data.senderId || client.data.userId;
+    
+    if (!senderId) {
+      this.logger.error('senderId is required but not provided');
+      return { error: 'senderId is required' };
+    }
     
     this.logger.debug({ senderId, receiverId: data.receiverId }, 'handling send message');
     

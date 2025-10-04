@@ -4,35 +4,72 @@ EchoStream is a real-time chat and event streaming platform built with a modern 
 
 ## Development Roadmap
 
-### **Direct & Group Chat**
-- ☐ One-to-one chat functionality
-- ☐ Group chat / chat rooms
-- ☐ Kafka topic per chat room
-- ☐ Event-driven message delivery
-- ☐ Message persistence (MongoDB)
-- ☐ Attachment support & metadata
+### **Phase 1: Authentication & User Management**
+- ✅ One-to-one chat functionality (basic)
+- ☐ User registration with email
+- ☐ Email verification with OTP (6-digit code)
+- ☐ User profile management
+- ☐ JWT authentication & refresh tokens
+- ☐ Password reset functionality
+- ☐ User search by username/email
 
-### **Real-time Features (Redis Pub/Sub)**
-- ☐ Online/offline user status (Redis)
+### **Phase 2: Friend System**
+- ☐ Send friend requests by username
+- ☐ Accept/decline friend requests
+- ☐ Friend list management
+- ☐ Block/unblock users
+- ☐ Online/offline status for friends
+- ☐ Friend request notifications
+
+### **Phase 3: Enhanced Chat Features**
+- ☐ Chat only with friends
+- ☐ Message persistence & history loading
+- ☐ Message delivery status (sent/delivered/read)
+- ☐ Typing indicators
+- ☐ Message reactions (emoji)
+- ☐ Message editing & deletion
+- ☐ File/image attachments (MinIO object storage)
+
+### **Phase 4: Group Chat**
+- ☐ Create group chats
+- ☐ Add/remove group members
+- ☐ Group admin permissions
+- ☐ Group settings & info
+- ☐ Kafka topic per group chat
+
+### **Phase 5: Real-time Features (Redis Pub/Sub)**
+- ☐ Real-time friend status updates
+- ☐ Real-time notifications
 - ☐ Typing indicator (Redis Pub/Sub)
 - ☐ Read receipts
-- ☐ Message delivery status
-- ☐ Real-time UI updates (WebSocket)
+- ☐ Push notifications (web/mobile)
 
-### **Kafka Event Replay**
+### **Phase 6: Advanced Features**
+- ☐ Message search & filtering
+- ☐ Chat themes & customization
+- ☐ Voice messages
+- ☐ Video calls (WebRTC)
+- ☐ Screen sharing
+- ☐ Message scheduling
+
+### **Phase 7: Kafka Event Replay & Analytics**
 - ☐ Message replay mechanism
 - ☐ Historical message retrieval
 - ☐ Event sourcing implementation
-- ☐ Replay past messages from Kafka
+- ☐ User activity analytics
+- ☐ Chat statistics dashboard
 
-### **Moderation**
+### **Phase 8: Moderation & Security**
 - ☐ Moderation microservice
 - ☐ Profanity filter
 - ☐ Content filtering
+- ☐ Spam detection
+- ☐ Rate limiting per user
+- ☐ Report & block system
 
-### **Performance**
-- ☐ Redis rate limiting
-- ☐ Cache strategy (temporary cache in Redis)
+### **Phase 9: Performance & Scalability**
+- ☐ Redis caching strategy
+- ☐ Database indexing optimization
 - ☐ Message queue optimization
 
 ---
@@ -41,29 +78,67 @@ EchoStream is a real-time chat and event streaming platform built with a modern 
 
 ### Backend
 
-- **NestJS**
-- **Apache Kafka** - Kafka topic for chat room
-- **Redis** - Online user state, rate limiting, temporary cache, Pub/Sub
-- **MongoDB** - Message history, attachment metadata
-- **WebSocket** - Real-time communication
+- **NestJS** - Main application framework
+- **Apache Kafka** - Event streaming & message queues
+- **Redis** - Caching, sessions, pub/sub, rate limiting
+- **MongoDB** - User data, messages, friendships
+- **MinIO** - Object storage for file attachments
+- **WebSocket (Socket.IO)** - Real-time communication
+- **JWT** - Authentication & authorization
+- **Nodemailer** - Email service for OTP verification
+- **Bcrypt** - Password hashing
+- **Class-validator** - Input validation
 
 ### Frontend
 
-- **Angular**
-- **TypeScript**
-- **RxJS** - Reactive state management
+- **Angular 18+** - Modern frontend framework
+- **TypeScript** - Type-safe development
+- **RxJS** - Reactive programming
+- **Socket.IO Client** - WebSocket connection
+- **Angular Material** - UI components (planned)
+- **PWA Support** - Progressive web app features
 
-### DevOps
+### Database Schema
 
-- **Docker, Docker Compose**
+- **Users** - Email, password, username, verification status
+- **OTP Codes** - Email verification codes
+- **Friendships** - Friend relationships & requests
+- **Messages** - Chat messages between friends
+- **Conversations** - Chat metadata & participants
 
-**Flow:**
-1. Users send messages via WebSocket
-2. Backend (NestJS) publishes to Kafka topic (chat room)
-3. Kafka distributes events to all consumers
-4. Redis tracks online status, typing indicators
-5. MongoDB stores message history & attachments
-6. Messages delivered to clients in real-time
+### DevOps & Infrastructure
+
+- **Docker & Docker Compose** - Containerization
+- **Redis Cluster** - Horizontal scaling (future)
+- **MongoDB Replica Set** - Data redundancy (future)
+- **Nginx** - Load balancer & reverse proxy (future)
+
+**Application Flow:**
+
+### Authentication Flow
+1. User registers with email → OTP sent to email
+2. User enters OTP → Account verified & JWT tokens issued
+3. User logs in → JWT authentication & session management
+
+### Friend System Flow
+1. User searches for friends by username
+2. Sends friend request → Stored in database
+3. Recipient gets notification → Accepts/declines request
+4. Friends can now chat with each other
+
+### Messaging Flow
+1. User sends message via WebSocket (only to friends)
+2. Backend validates friendship → Publishes to Kafka topic
+3. Kafka distributes message events to consumers
+4. MongoDB stores message permanently
+5. Redis updates real-time status & typing indicators
+6. Message delivered to recipient via WebSocket
+
+### Real-time Updates
+- Friend requests & status changes via Redis Pub/Sub
+- Typing indicators via Redis (temporary data)
+- Online/offline status via Redis sessions
+- Push notifications for offline users
 
 ---
 

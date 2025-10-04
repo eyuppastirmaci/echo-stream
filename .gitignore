@@ -44,6 +44,12 @@ frontend/.angular/
 frontend/out-tsc/
 frontend/.ng-cache/
 
+# Angular WebUI specific
+apps/frontend/webui/dist/
+apps/frontend/webui/.angular/
+apps/frontend/webui/out-tsc/
+apps/frontend/webui/.ng-cache/
+
 # Angular environment files
 frontend/src/environments/environment.prod.ts
 frontend/src/environments/environment.local.ts
@@ -137,12 +143,9 @@ $RECYCLE.BIN/
 # ============================================
 # IDEs & Editors
 # ============================================
-# VSCode
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
+# VSCode - Ignore all .vscode directories
+**/.vscode/
+.vscode/
 *.code-workspace
 
 # IntelliJ IDEA
