@@ -5,7 +5,7 @@ EchoStream is a real-time chat and event streaming platform built with a modern 
 ## Development Roadmap
 
 ### **Phase 1: Authentication & User Management**
-- ✅ One-to-one chat functionality (basic)
+- ✅ One-to-one chat functionality
 - ☐ User registration with email
 - ☐ Email verification with OTP (6-digit code)
 - ☐ User profile management
@@ -42,7 +42,7 @@ EchoStream is a real-time chat and event streaming platform built with a modern 
 - ☐ Real-time notifications
 - ☐ Typing indicator (Redis Pub/Sub)
 - ☐ Read receipts
-- ☐ Push notifications (web/mobile)
+- ☐ Push notifications
 
 ### **Phase 6: Advanced Features**
 - ☐ Message search & filtering
@@ -97,21 +97,6 @@ EchoStream is a real-time chat and event streaming platform built with a modern 
 - **Socket.IO Client** - WebSocket connection
 - **Angular Material** - UI components (planned)
 - **PWA Support** - Progressive web app features
-
-### Database Schema
-
-- **Users** - Email, password, username, verification status
-- **OTP Codes** - Email verification codes
-- **Friendships** - Friend relationships & requests
-- **Messages** - Chat messages between friends
-- **Conversations** - Chat metadata & participants
-
-### DevOps & Infrastructure
-
-- **Docker & Docker Compose** - Containerization
-- **Redis Cluster** - Horizontal scaling (future)
-- **MongoDB Replica Set** - Data redundancy (future)
-- **Nginx** - Load balancer & reverse proxy (future)
 
 **Application Flow:**
 
