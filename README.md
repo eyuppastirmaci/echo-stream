@@ -178,8 +178,21 @@ docker-compose up -d
 docker-compose ps
 ```
 
-#### 2. Start the Backend (Chat Service)
+#### 2. Start the Backend Services
 
+**User Service:**
+```bash
+# Navigate to user service directory
+cd apps/backend/user-service
+
+# Install dependencies
+npm install
+
+# Build and start the service
+npm run build && npm start
+```
+
+**Chat Service:**
 ```bash
 # Navigate to chat service directory
 cd apps/backend/chat-service
